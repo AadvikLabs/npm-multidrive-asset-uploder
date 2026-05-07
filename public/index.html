@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Drive Uploader Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>MultiDrive</span>
+            </div>
+            <nav>
+                <button class="nav-item active" data-tab="upload">
+                    <i class="fas fa-upload"></i> Upload
+                </button>
+                <button class="nav-item" data-tab="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h1>Unified Upload Dashboard</h1>
+                <p>Transfer files to any cloud provider with one click.</p>
+            </header>
+
+            <section id="upload-tab" class="tab-content active">
+                <div class="upload-grid">
+                    <div class="config-panel">
+                        <h3>1. Select Provider</h3>
+                        <div class="provider-selector">
+                            <label class="provider-card active" data-provider="google-drive">
+                                <input type="radio" name="provider" value="google-drive" checked>
+                                <i class="fab fa-google-drive"></i>
+                                <span>Google Drive</span>
+                            </label>
+                            <label class="provider-card" data-provider="onedrive">
+                                <input type="radio" name="provider" value="onedrive">
+                                <i class="fab fa-microsoft"></i>
+                                <span>OneDrive</span>
+                            </label>
+                            <label class="provider-card" data-provider="s3">
+                                <input type="radio" name="provider" value="s3">
+                                <i class="fab fa-aws"></i>
+                                <span>Amazon S3</span>
+                            </label>
+                            <label class="provider-card" data-provider="box">
+                                <input type="radio" name="provider" value="box">
+                                <i class="fas fa-box-open"></i>
+                                <span>Box.com</span>
+                            </label>
+                            <label class="provider-card" data-provider="zoho">
+                                <input type="radio" name="provider" value="zoho">
+                                <i class="fas fa-z"></i>
+                                <span>Zoho</span>
+                            </label>
+                        </div>
+
+                        <div class="options-panel">
+                            <h3>2. Options</h3>
+                            <div class="form-group">
+                                <label>Folder ID (Optional)</label>
+                                <input type="text" id="folderId" placeholder="Enter remote folder ID...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-panel">
+                        <h3>3. Drop File</h3>
+                        <div id="drop-zone" class="drop-zone">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or <span>browse</span></p>
+                            <input type="file" id="fileInput" hidden>
+                        </div>
+
+                        <div id="file-preview" class="file-preview hidden">
+                            <div class="file-info">
+                                <i class="far fa-file-pdf"></i>
+                                <div class="details">
+                                    <span id="file-name">filename.pdf</span>
+                                    <span id="file-size">2.4 MB</span>
+                                </div>
+                            </div>
+                            <button id="upload-btn" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Upload Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="result-container" class="result-container hidden">
+                    <div class="result-card">
+                        <div class="status-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Upload Successful!</h2>
+                        <div class="result-details">
+                            <div class="res-row vertical">
+                                <span>File ID:</span>
+                                <span id="res-id" class="break-all">---</span>
+                            </div>
+                            <div class="res-row">
+                                <span>Provider:</span>
+                                <span id="res-provider">---</span>
+                            </div>
+                            <div class="res-row vertical">
+                                <span>View URL:</span>
+                                <span id="res-view-url" class="break-all url-text">---</span>
+                            </div>
+                            <div class="res-row vertical">
+                                <span>Download URL:</span>
+                                <span id="res-download-url" class="break-all url-text">---</span>
+                            </div>
+                        </div>
+                        <div class="action-links">
+                            <a id="view-link" href="#" target="_blank" class="btn-secondary">
+                                <i class="fas fa-external-link-alt"></i> View File
+                            </a>
+                            <button id="copy-btn" class="btn-tertiary">
+                                <i class="fas fa-copy"></i> Copy URL
+                            </button>
+                            <a id="download-link" href="#" target="_blank" class="btn-tertiary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                        <button class="btn-text" id="reset-btn">Upload another file</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="loader" class="loader-overlay hidden">
+        <div class="spinner"></div>
+        <p>Streaming data to cloud...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
